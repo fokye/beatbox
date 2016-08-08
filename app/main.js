@@ -27,6 +27,18 @@ const performance = new Performance({
         chords: melodyA
       }),
       repeatCount: Infinity
+    }),
+    new MelodyPerformer({
+      instrument: new Instrument({
+        audioContext,
+        oscillatorType: 'sine'
+      }),
+      melody: new Melody({
+        name: 'phryg1an',
+        baseNote: NOTES.find(({octave, names}) => octave === 2 && names.includes('F')),
+        chords: [[0, 7], [12], [24, 31], [36, 41, 43], [29], [36, 43], [41], [7], [19]]
+      }),
+      repeatCount: Infinity
     })
   ],
   tempo: 120,

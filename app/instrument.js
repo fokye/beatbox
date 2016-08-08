@@ -1,10 +1,11 @@
 class Instrument {
 
-  constructor({audioContext, oscillatorType = 'sine', wave}) {
+  constructor({audioContext, oscillatorType = 'sine', volume = 100, wave}) {
     Object.assign(this, {
       audioContext,
       oscillatorType,
       oscillators: [],
+      volume,
       wave,
       gain: audioContext.createGain(),
       patch: audioContext.createChannelMerger(6)
@@ -12,6 +13,7 @@ class Instrument {
     for(let i = 0; i < 6; i++) {
       let oscillator = audioContext.createOscillator();
       let gain = audioContext.createGain();
+      gain.gain.value = volume;
       oscillator.gain = gain;
       if(wave) {
         oscillator.periodicWave = wave.generate(audioContext);
@@ -34,7 +36,7 @@ class Instrument {
       let note = notes[i];
       let oscillator = this.oscillators[i];
       if(note) {
-        oscillator.gain.gain.value = 100;
+        oscillator.gain.gain.value = this.volume;
         oscillator.frequency.value = note.frequency;
       } else {
         oscillator.gain.gain.value = 0;

@@ -62,13 +62,6 @@ class MelodyPerformer extends Performer {
   }
 
   perform(measure, beat) {
-    console.log('MelodyPerformer#perform', {
-      measure,
-      beat,
-      iterationCount: this.iterationCount,
-      direction: this.direction,
-      melodyIndex: this.melodyIndex
-    });
     this.instrument.notes = this.currentNotes;
     this.nextStep();
   }
