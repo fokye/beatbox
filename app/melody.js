@@ -1,15 +1,15 @@
-import NOTES from './data/notes';
+import NoteLibrary from './note-library';
 
 class Melody {
 
   constructor({name, baseNote, chords}) {
     Object.assign(this, {name, chords});
-    this.baseNote = baseNote;
+    this.baseNote = NoteLibrary.find(baseNote);
   }
 
   set baseNote(note) {
-    let baseNoteIndex = NOTES.indexOf(note);
-    this.sequence = this.chords.map((chord) => chord.map((offset) => NOTES[baseNoteIndex + offset]).filter(Boolean));
+    const {chords} = this;
+    this.sequence = chords.map((chord) => chord.map((offset) => NoteLibrary.transpose(note, offset)));
   }
 
 }

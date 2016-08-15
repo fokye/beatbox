@@ -1,3 +1,5 @@
+import Wave from './wave';
+
 class Instrument {
 
   constructor({audioContext, oscillatorType = 'sine', volume = 100, wave}) {
@@ -16,7 +18,7 @@ class Instrument {
       gain.gain.value = volume;
       oscillator.gain = gain;
       if(wave) {
-        oscillator.periodicWave = wave.generate(audioContext);
+        oscillator.periodicWave = new Wave(wave).generate(audioContext);
       } else {
         oscillator.type = oscillatorType;
       }

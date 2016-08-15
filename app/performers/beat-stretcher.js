@@ -1,22 +1,22 @@
 import Performer from './performer';
 
-class BeatSkipper extends Performer {
+class BeatStretcher extends Performer {
 
-  constructor(wrappedPerformer, {beatsToSkip = 1} = {}) {
+  constructor(wrappedPerformer, {beatsToStretch = 1} = {}) {
     super({instrument: wrappedPerformer.instrument});
     Object.assign(this, {
-      beatsToSkip,
+      beatsToStretch,
       wrappedPerformer,
-      skippedBeats: beatsToSkip
+      stretchedBeats: beatsToStretch
     });
   }
 
   perform(measure, beat) {
-    if(this.skippedBeats >= this.beatsToSkip) {
+    if(this.stretchedBeats >= this.beatsToStretch) {
       this.wrappedPerformer.perform(...arguments);
-      this.skippedBeats = 0;
+      this.stretchedBeats = 0;
     } else {
-      this.skippedBeats++;
+      this.stretchedBeats++;
     }
   }
 
@@ -30,4 +30,4 @@ class BeatSkipper extends Performer {
 
 }
 
-export default BeatSkipper;
+export default BeatStretcher;

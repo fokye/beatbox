@@ -1,1 +1,1 @@
-export {default as SineWave} from './waves/sine-wave';
+export {default as sineWave} from './waves/sine-wave';
